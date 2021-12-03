@@ -257,7 +257,7 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
         jTextField_adminNombre.setText(administrador.getNombre());
         jTextField_adminNumHorasTrabajadas.setText(String.valueOf(administrador.getNumHorasTrabajadas()));
         jTextField_adminPorcentajeCompensacion.setText(String.valueOf(administrador.getPorcentajeCompensacion()));
-        this.jTextField_adminSalario.setText(String.valueOf(administrador.getSalario()));
+        jTextField_adminSalario.setText(String.valueOf(administrador.getSalario()));
         validateButtons();
     }
 

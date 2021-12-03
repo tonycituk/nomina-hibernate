@@ -1,15 +1,9 @@
 package com.lemur.nomina.MVC.Model.DAO;
 
 import com.lemur.nomina.MVC.Model.Administrador;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.GenerationType;
 
 public class AdministradorDAO {
 
