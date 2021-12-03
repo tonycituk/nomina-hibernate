@@ -21,7 +21,7 @@ public class NominaCRUD {
 
     public NominaCRUD(String tableName) {
         this.tableName = tableName;
-        this.cnnctr = new Connector();
+       // this.cnnctr = new Connector();
     }
 
     public ResultSet getAll() {

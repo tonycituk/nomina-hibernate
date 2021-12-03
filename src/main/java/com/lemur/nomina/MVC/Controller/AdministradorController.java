@@ -22,9 +22,20 @@ public class AdministradorController {
     
     
     public ArrayList<Administrador> getAllAdministradores(){
-        return this.administradorDAO.getAllAdministradores();
+        return this.administradorDAO.getAdministradores();
     }
     
+    public int addAdmin(Administrador administrador){
+        return this.administradorDAO.addAdministrador(administrador);
+    }
+    
+    public int updateAdministrador(Administrador administrador){
+        return this.administradorDAO.updateAdministrador(administrador);
+    }
+    
+    public int deleteAdministrador(Administrador administrador){
+        return this.administradorDAO.deleteAdministrador(administrador);
+    }
     
     public static void main(String[] args) {
         AdministradorController adminctrlr = new AdministradorController();

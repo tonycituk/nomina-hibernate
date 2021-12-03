@@ -4,23 +4,26 @@ import java.sql.Connection;
 // jdbc:mariadb://localhost:3306/DB?user=root&password=myPassword"
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Connector {
     private Connection conn = null;
-    String urlString;
-
-    public Connector(String urlString) {
+    private String urlString;
+    private Properties credentials;
+    
+   
+    public Connector(String urlString, Properties credentials) {
         this.urlString = urlString;
-    }
-    public Connector() {
-        PropertiesDB dbprops = new PropertiesDB();
-        this.urlString = dbprops.getUrlString();
+        this.credentials = credentials;
     }
 
+    public Connector() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public void connect() {
         try {
-            this.conn = DriverManager.getConnection(this.urlString);
+            this.conn = DriverManager.getConnection(this.urlString, this.credentials);
             //System.out.println("Success Connection \n");
         } catch (SQLException ex) {
             // handle errors
@@ -45,10 +48,14 @@ public class Connector {
         return this.conn;
     }
     
-    public static void main(String[] args) {
-        Connector connctr = new Connector();
-        connctr.connect();
-        connctr.close();
+    public static void main(String[] args){
+        DatabaseProps props = new DatabaseProps();
+        props.loadDbInfo();
+        props.loadCredentials();
+        
+        Connector connector = new Connector(props.getUrlString(), props.getCredentials());
+        connector.connect();
+        connector.close();
     }
 
 }

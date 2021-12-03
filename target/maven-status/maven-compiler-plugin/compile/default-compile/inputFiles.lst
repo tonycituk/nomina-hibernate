@@ -1,8 +1,12 @@
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Model\DAO\AdministradorDAO.java
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Model\Empleado.java
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\Config\Connector.java
+C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Controller\AdministradorController.java
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Model\DAO\NominaCRUD.java
+C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\View\AdministradorManagerView.java
+C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\Config\DatabaseProps.java
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Model\Jornalero.java
-C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\Config\PropertiesDB.java
+C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\View\AdminBrowserCRUD.java
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Model\Administrador.java
+C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\View\Util\InputValidator.java
 C:\Users\tonyc\Documents\NetBeansProjects\nomina\src\main\java\com\lemur\nomina\MVC\Model\DAO\EmpleadoDAO.java
