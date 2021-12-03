@@ -52,6 +52,8 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
         jButton_nuevo = new javax.swing.JButton();
         jButton_actualizar = new javax.swing.JButton();
         jButton_eliminar = new javax.swing.JButton();
+        jLabel_adminSalario = new javax.swing.JLabel();
+        jTextField_adminSalario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nomina: Administrador Browser");
@@ -98,6 +100,11 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
         });
 
         jButton_actualizar.setText("actualizar");
+        jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_actualizarActionPerformed(evt);
+            }
+        });
 
         jButton_eliminar.setText("eliminar");
         jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +112,11 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
                 jButton_eliminarActionPerformed(evt);
             }
         });
+
+        jLabel_adminSalario.setText("salario");
+
+        jTextField_adminSalario.setEditable(false);
+        jTextField_adminSalario.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,25 +134,27 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_adminId, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_adminId, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_adminSalario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_adminSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_adminPorcentajeCompensacion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField_adminPorcentajeCompensacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel_adminId)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_adminId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton_anterior)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel_adminNumHorasTrabajadas)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_adminNumHorasTrabajadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel_adminNombre)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField_adminNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel_adminNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel_adminNumHorasTrabajadas))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField_adminNumHorasTrabajadas)
+                                    .addComponent(jTextField_adminNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addComponent(jButton_siguiente)))
                 .addGap(27, 27, 27))
@@ -172,7 +186,11 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_adminPorcentajeCompensacion)
                     .addComponent(jTextField_adminPorcentajeCompensacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_adminSalario)
+                    .addComponent(jTextField_adminSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_nuevo)
                     .addComponent(jButton_actualizar)
@@ -210,30 +228,36 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
         if (n == 0 || n == -1) {
             JOptionPane.showMessageDialog(this, "Se canceló la operación.", "Aviso", 1);
         } else {
-            int res = admnCntrllr.deleteAdministrador(administradores.get(pos));
-            if (res == 1) {
-                administradores = admnCntrllr.getAllAdministradores();
-                pos = 0;
-                loadBrowser(administradores.get(pos));
-                JOptionPane.showMessageDialog(this, "Se eliminó 1 registro.", "Aviso", 1);
-            }
+            admnCntrllr.deleteAdministrador(administradores.get(pos));
+
+            administradores = admnCntrllr.getAllAdministradores();
+            pos = 0;
+            loadBrowser(administradores.get(pos));
+            JOptionPane.showMessageDialog(this, "Se eliminó 1 registro.", "Aviso", 1);
+
         }
 
     }//GEN-LAST:event_jButton_eliminarActionPerformed
 
     private void jButton_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_nuevoActionPerformed
         // TODO add your handling code here:
-               
-       
-        AdminCreate adminC = new AdminCreate(this, this.administradores.get(pos));
+
+        AdminCreate adminC = new AdminCreate(this);
         adminC.setVisible(true);
     }//GEN-LAST:event_jButton_nuevoActionPerformed
+
+    private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
+        // TODO add your handling code here:
+        AdminUpdate adminU = new AdminUpdate(this, this.administradores.get(pos));
+        adminU.setVisible(true);
+    }//GEN-LAST:event_jButton_actualizarActionPerformed
 
     private void loadBrowser(Administrador administrador) {
         jTextField_adminId.setText(String.valueOf(administrador.getId()));
         jTextField_adminNombre.setText(administrador.getNombre());
         jTextField_adminNumHorasTrabajadas.setText(String.valueOf(administrador.getNumHorasTrabajadas()));
         jTextField_adminPorcentajeCompensacion.setText(String.valueOf(administrador.getPorcentajeCompensacion()));
+        this.jTextField_adminSalario.setText(String.valueOf(administrador.getSalario()));
         validateButtons();
     }
 
@@ -276,6 +300,7 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdminBrowserCRUD.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -283,6 +308,18 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
                 new AdminBrowserCRUD().setVisible(true);
             }
         });
+    }
+
+    public void returnTo() {
+        //this.setEnabled(true);
+        this.administradores = this.admnCntrllr.getAllAdministradores();
+        this.loadBrowser(this.administradores.get(this.administradores.size()));
+    }
+    
+    public void returnToFU() {
+        //this.setEnabled(true);
+        this.administradores = this.admnCntrllr.getAllAdministradores();
+        this.loadBrowser(this.administradores.get(pos));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,9 +332,11 @@ public class AdminBrowserCRUD extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_adminNombre;
     private javax.swing.JLabel jLabel_adminNumHorasTrabajadas;
     private javax.swing.JLabel jLabel_adminPorcentajeCompensacion;
+    private javax.swing.JLabel jLabel_adminSalario;
     private javax.swing.JTextField jTextField_adminId;
     private javax.swing.JTextField jTextField_adminNombre;
     private javax.swing.JTextField jTextField_adminNumHorasTrabajadas;
     private javax.swing.JTextField jTextField_adminPorcentajeCompensacion;
+    private javax.swing.JTextField jTextField_adminSalario;
     // End of variables declaration//GEN-END:variables
 }

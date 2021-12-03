@@ -27,6 +27,7 @@ public class AdministradorManagerView extends javax.swing.JFrame {
         this.administradorController = new AdministradorController();
         this.administradores = administradorController.getAllAdministradores();
         popularTextField(pos);
+        this.jTextField_id.setToolTipText("No puedes modificar el id.");
     }
 
     /**

@@ -13,24 +13,26 @@ import javax.swing.JOptionPane;
  *
  * @author tonyc
  */
-public class AdminCreate extends javax.swing.JFrame {
+public class AdminUpdate extends javax.swing.JFrame {
 
     InputValidator iv;
-    private AdministradorController admnCntrllr;
-    private AdminBrowserCRUD parent;
-    private Administrador administradorEnDiscordia;
+    AdminBrowserCRUD parent;
+    Administrador administrador;
+    AdministradorController admnCntrllr;
 
     /**
-     * Creates new form AdminCreate
+     * Creates new form AdminUpdate
      */
-    public AdminCreate(AdminBrowserCRUD parent) {
+    public AdminUpdate(AdminBrowserCRUD parent, Administrador administrador) {
+        this.admnCntrllr = new AdministradorController();
         this.parent = parent;
-        //this.parent.setEnabled(false);
-        admnCntrllr = new AdministradorController();
+        this.administrador = administrador;
         iv = new InputValidator();
         initComponents();
-        this.jTextField_adminNombre.setText("");
-        this.jTextField_adminNumHorasTrabajadas.setText("");
+        this.jTextField_adminId.setText(String.valueOf(this.administrador.getId()));
+        this.jTextField_adminNombre.setText(String.valueOf(this.administrador.getNombre()));
+        this.jTextField_adminNumHorasTrabajadas.setText(String.valueOf(this.administrador.getNumHorasTrabajadas()));
+
     }
 
     /**
@@ -42,18 +44,23 @@ public class AdminCreate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton_guardar = new javax.swing.JButton();
-        jLabel_adminNombre = new javax.swing.JLabel();
-        jTextField_adminNombre = new javax.swing.JTextField();
         jLabel_adminNumHorasTrabajadas = new javax.swing.JLabel();
         jTextField_adminNumHorasTrabajadas = new javax.swing.JTextField();
         jLabel_adminTarifa = new javax.swing.JLabel();
         jTextField_adminTarifa = new javax.swing.JTextField();
+        jButton_guardar = new javax.swing.JButton();
+        jLabel_adminNombre = new javax.swing.JLabel();
+        jTextField_adminNombre = new javax.swing.JTextField();
+        jTextField_adminId = new javax.swing.JTextField();
+        jLabel_adminId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Nomina: Crear Administrador");
 
-        jButton_guardar.setText("guardar");
+        jLabel_adminNumHorasTrabajadas.setText("horas trabajadas");
+
+        jLabel_adminTarifa.setText("tarifa");
+
+        jButton_guardar.setText("actualizar");
         jButton_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_guardarActionPerformed(evt);
@@ -62,21 +69,21 @@ public class AdminCreate extends javax.swing.JFrame {
 
         jLabel_adminNombre.setText("nombre");
 
-        jTextField_adminNombre.setText("jTextField1");
+        jTextField_adminId.setEditable(false);
 
-        jLabel_adminNumHorasTrabajadas.setText("horas trabajadas");
-
-        jTextField_adminNumHorasTrabajadas.setText("jTextField1");
-
-        jLabel_adminTarifa.setText("tarifa");
+        jLabel_adminId.setText("id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_adminId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_adminId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel_adminTarifa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -98,7 +105,11 @@ public class AdminCreate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_adminId)
+                            .addComponent(jTextField_adminId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel_adminNombre)
                             .addComponent(jTextField_adminNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,25 +151,25 @@ public class AdminCreate extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "El número de horas trabajadas ingresadas no es válido.", "Alerta", 0);
                         jTextField_adminNumHorasTrabajadas.setText("");
                     } else {
-                        Administrador administrador = new Administrador(
-                                jTextField_adminNombre.getText(),
-                                Double.parseDouble(jTextField_adminNumHorasTrabajadas.getText()),
-                                Double.parseDouble(jTextField_adminTarifa.getText()));
-                        
-                        admnCntrllr.addAdministrador(administrador);
-                        JOptionPane.showMessageDialog(this, "Se ha agregado 1 registro.", "Info", 1);
+                        administrador.setNombre(jTextField_adminNombre.getText());
+                        administrador.calcularSalario(Double.parseDouble(
+                                jTextField_adminNumHorasTrabajadas.getText()),
+                                Double.parseDouble(jTextField_adminTarifa.getText())
+                        );
+
+                        admnCntrllr.updateAdministrador(administrador);
+                        JOptionPane.showMessageDialog(this, "Se ha actualizado 1 registro.", "Info", 1);
                         jTextField_adminNombre.setText("");
                         jTextField_adminNumHorasTrabajadas.setText("");
                         this.setVisible(false);
                         if (parent != null) {
-                            this.parent.returnTo();
+                            this.parent.returnToFU();
                         }
 
                     }
                 }
             }
         }
-
 
     }//GEN-LAST:event_jButton_guardarActionPerformed
 
@@ -179,29 +190,31 @@ public class AdminCreate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminCreate(null).setVisible(true);
+                new AdminUpdate(null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_guardar;
+    private javax.swing.JLabel jLabel_adminId;
     private javax.swing.JLabel jLabel_adminNombre;
     private javax.swing.JLabel jLabel_adminNumHorasTrabajadas;
     private javax.swing.JLabel jLabel_adminTarifa;
+    private javax.swing.JTextField jTextField_adminId;
     private javax.swing.JTextField jTextField_adminNombre;
     private javax.swing.JTextField jTextField_adminNumHorasTrabajadas;
     private javax.swing.JTextField jTextField_adminTarifa;

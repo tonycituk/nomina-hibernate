@@ -27,24 +27,26 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `administrador`
 --
 
-CREATE TABLE `administrador` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `Administrador` (
+  `id` BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `nombre` varchar(55) NOT NULL,
-  `numHorasTrabajadas` double NOT NULL
+  `salario` double NOT NULL,
+  `numHorasTrabajadas` double NOT NULL,
+  `porcentajeCompensacion` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id`, `nombre`, `numHorasTrabajadas`) VALUES
-(1, 'John', 80),
-(2, 'Mike', 79),
-(3, 'Polo', 60),
-(4, 'Gerard', 90),
-(5, 'Richard', 75),
-(6, 'Sandunga', 121),
-(7, 'Wiskuchi', 80);
+--INSERT INTO `administrador` (`id`, `nombre`, `numHorasTrabajadas`) VALUES
+--(1, 'John', 80),
+--(2, 'Mike', 79),
+--(3, 'Polo', 60),
+--(4, 'Gerard', 90),
+--(5, 'Richard', 75),
+--(6, 'Sandunga', 121),
+--(7, 'Wiskuchi', 80);
 
 --
 -- Índices para tablas volcadas
@@ -53,8 +55,8 @@ INSERT INTO `administrador` (`id`, `nombre`, `numHorasTrabajadas`) VALUES
 --
 -- Indices de la tabla `administrador`
 --
-ALTER TABLE `administrador`
-  ADD PRIMARY KEY (`id`);
+--ALTER TABLE `administrador`
+--  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -63,10 +65,17 @@ ALTER TABLE `administrador`
 --
 -- AUTO_INCREMENT de la tabla `administrador`
 --
-ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-COMMIT;
+--ALTER TABLE `administrador`
+--  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+INSERT INTO nomina_poo.Administrador (nombre,salario,numHorasTrabajadas,porcentajeCompensacion) VALUES
+	 ('Rodro',87750.0,1500.0,0.3),
+	 ('Jhonny',16731.0,90.0,0.3),
+	 ('Teo',13572.0,78.0,0.2),
+	 ('Fernan',5206.5,89.0,0.3),
+	 ('Daniel',503.99999999999994,35.0,0.2);

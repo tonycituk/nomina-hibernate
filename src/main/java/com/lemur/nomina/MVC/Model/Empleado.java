@@ -1,6 +1,6 @@
 package com.lemur.nomina.MVC.Model;
 
-public class Empleado implements Comparable<Empleado>{
+public class Empleado{
     private int id;
     private String nombre;
     private double salario;
@@ -54,7 +54,7 @@ public class Empleado implements Comparable<Empleado>{
         this.salario = numHorasTrabajadas * tarifa;
         return this.salario;
     }
-    public int compareTo(Empleado aEmpleado){
+    /*public int compareTo(Empleado aEmpleado){
         if(this.getClass() == Administrador.class){
             if(aEmpleado instanceof Administrador){
                 return Double.compare(aEmpleado.getSalario(), this.getSalario());
@@ -71,5 +71,5 @@ public class Empleado implements Comparable<Empleado>{
                 return 1;
             }
         }
-    }
+    }*/
 }

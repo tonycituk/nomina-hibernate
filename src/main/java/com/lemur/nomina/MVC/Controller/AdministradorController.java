@@ -4,43 +4,49 @@
  */
 package com.lemur.nomina.MVC.Controller;
 
+import com.lemur.nomina.Config.EntityManagerProvider;
 import com.lemur.nomina.MVC.Model.Administrador;
 import com.lemur.nomina.MVC.Model.DAO.AdministradorDAO;
 import java.util.ArrayList;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author tonyc
  */
 public class AdministradorController {
-    AdministradorDAO administradorDAO;
-    
-    
-    public AdministradorController(){
-        administradorDAO = new AdministradorDAO();
+
+    private AdministradorDAO administradorDAO;
+
+    public AdministradorController() {
+        EntityManager defaultEntityManager = EntityManagerProvider
+                .open(EntityManagerProvider.DEFAULT_PERSISTENCE_UNIT);
+
+        administradorDAO = new AdministradorDAO(defaultEntityManager);
     }
-    
-    
-    public ArrayList<Administrador> getAllAdministradores(){
-        return this.administradorDAO.getAdministradores();
+
+    public ArrayList<Administrador> getAllAdministradores() {
+        return this.administradorDAO.findAll();
     }
-    
-    public int addAdmin(Administrador administrador){
-        return this.administradorDAO.addAdministrador(administrador);
+
+    public void addAdministrador(Administrador administrador) {
+        this.administradorDAO.create(administrador);
     }
-    
-    public int updateAdministrador(Administrador administrador){
-        return this.administradorDAO.updateAdministrador(administrador);
+
+    public void updateAdministrador(Administrador administrador) {
+        this.administradorDAO.update(administrador);
     }
-    
-    public int deleteAdministrador(Administrador administrador){
-        return this.administradorDAO.deleteAdministrador(administrador);
+
+    public void deleteAdministrador(Administrador administrador) {
+        this.administradorDAO.delete(administrador);
     }
-    
+
     public static void main(String[] args) {
         AdministradorController adminctrlr = new AdministradorController();
-        
+        Administrador newAdministrador = new Administrador("Teo", 0.0, 0.0, 0.0);
+        adminctrlr.addAdministrador(newAdministrador);
+
         System.out.println(adminctrlr.getAllAdministradores());
     }
-    
+
 }
